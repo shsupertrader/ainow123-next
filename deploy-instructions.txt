@@ -1,0 +1,27 @@
+# 🚀 最简单的部署方法
+
+## 方法1：压缩包上传（推荐）
+1. 把整个项目文件夹压缩成 ainow123-next.zip
+2. 在GitHub仓库页面点击 "Add file" → "Upload files"  
+3. 上传zip文件
+4. GitHub会自动解压
+
+## 方法2：使用GitHub Desktop（可视化工具）
+1. 下载安装：https://desktop.github.com/
+2. 登录GitHub账号
+3. 点击 "Clone a repository from the Internet"
+4. 选择你刚创建的 ainow123-next 仓库
+5. 把项目文件复制到克隆的文件夹
+6. 在GitHub Desktop中提交并推送
+
+## Vercel环境变量配置：
+JWT_SECRET=your-super-secret-jwt-key-12345
+COMFYUI_API_URL=http://175.155.64.198:8189  
+NEXTAUTH_SECRET=another-secret-key-67890
+
+## 成功标志：
+- ✅ 可以访问你的网站
+- ✅ 可以注册登录用户
+- ✅ 图生视频功能正常
+- ✅ 全球CDN加速
+- ✅ 自动HTTPS加密

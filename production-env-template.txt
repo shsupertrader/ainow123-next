@@ -1,0 +1,27 @@
+# 生产环境配置文件 (.env.production)
+# 复制到服务器上的项目根目录
+
+# 数据库配置
+DATABASE_URL="file:./production.db"
+
+# JWT密钥 (请更改为强密码)
+JWT_SECRET="your-super-secure-jwt-secret-change-this-immediately"
+
+# ComfyUI API配置
+COMFYUI_API_URL="http://175.155.64.198:8189"
+COMFYUI_API_KEY=""
+
+# Z-Pay支付配置 (需要到z-pay.cn申请)
+ZPAY_MERCHANT_ID="your-zpay-merchant-id"
+ZPAY_API_KEY="your-zpay-api-key"
+ZPAY_SECRET_KEY="your-zpay-secret-key"
+ZPAY_NOTIFY_URL="https://your-domain.com/api/payment/notify"
+
+# Next.js配置
+NEXTAUTH_URL="https://your-domain.com"
+NEXTAUTH_SECRET="your-nextauth-secret-key"
+NODE_ENV="production"
+PORT=3000
+
+# 应用URL
+NEXT_PUBLIC_APP_URL="https://your-domain.com"
