@@ -102,3 +102,4 @@ echo "📊 建议安装监控工具："
 echo "   - htop: sudo apt install htop"
 echo "   - iotop: sudo apt install iotop"
 echo "   - netdata: bash <(curl -Ss https://my-netdata.io/kickstart.sh)"
+

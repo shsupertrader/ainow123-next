@@ -25,3 +25,4 @@ PORT=3000
 
 # 应用URL
 NEXT_PUBLIC_APP_URL="https://your-domain.com"
+

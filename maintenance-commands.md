@@ -85,3 +85,4 @@ sudo systemctl restart nginx
 sudo journalctl -u nginx -f
 sudo journalctl -u ssh -f
 ```
+

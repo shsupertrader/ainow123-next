@@ -1,0 +1,99 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  username  String   @unique
+  password  String
+  avatar    String?
+  credits   Int      @default(100)
+  role      String   @default("USER")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  generations Generation[]
+  payments    Payment[]
+  orders      Order[]
+
+  @@map("users")
+}
+
+model Generation {
+  id            String   @id @default(cuid())
+  userId        String
+  type          String
+  prompt        String
+  negativePrompt String?
+  imageUrl      String?
+  videoUrl      String?
+  inputImageUrl String?
+  status        String   @default("PENDING")
+  workflowId    String?
+  comfyuiJobId  String?
+  creditsUsed   Int      @default(0)
+  parameters    String?
+  errorMessage  String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("generations")
+}
+
+model ComfyUIConfig {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  apiUrl    String
+  apiKey    String?
+  isActive  Boolean  @default(false)
+  workflows String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("comfyui_configs")
+}
+
+model Payment {
+  id            String   @id @default(cuid())
+  userId        String
+  orderId       String   @unique
+  amount        Float
+  credits       Int
+  status        String   @default("PENDING")
+  paymentMethod String
+  zpayOrderId   String?
+  zpayTradeNo   String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("payments")
+}
+
+model Order {
+  id          String   @id @default(cuid())
+  userId      String
+  totalAmount Float
+  credits     Int
+  status      String   @default("PENDING")
+  paymentId   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("orders")
+}
+

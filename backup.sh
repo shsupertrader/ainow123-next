@@ -19,3 +19,4 @@ find $BACKUP_DIR -name "*.db" -mtime +7 -delete
 find $BACKUP_DIR -name "*.backup" -mtime +7 -delete
 
 echo "备份完成: $DATE"
+
