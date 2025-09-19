@@ -5,9 +5,10 @@ import Header from '@/components/Header'
 import Hero from '@/components/Hero'
 import ToolGrid from '@/components/ToolGrid'
 import RecentGenerations from '@/components/RecentGenerations'
+import { User } from '@/types/user'
 
 export default function HomePage() {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {

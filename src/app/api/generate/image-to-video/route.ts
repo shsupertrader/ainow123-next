@@ -140,11 +140,6 @@ export async function POST(request: NextRequest) {
         data: { credits: user.credits }
       })
 
-      // 删除上传的文件
-      if (fs.existsSync(filePath)) {
-        fs.unlinkSync(filePath)
-      }
-
       return NextResponse.json({
         success: false,
         error: result.error || '生成失败'

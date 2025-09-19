@@ -3,15 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Header from '@/components/Header'
-
-interface User {
-  id: string
-  username: string
-  email: string
-  credits: number
-  role: string
-  createdAt: string
-}
+import { User } from '@/types/user'
 
 export default function ProfilePage() {
   const router = useRouter()
@@ -78,7 +70,7 @@ export default function ProfilePage() {
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">注册时间:</span>
-                      <span className="text-gray-900">{new Date(user.createdAt).toLocaleDateString()}</span>
+                      <span className="text-gray-900">{user.createdAt ? new Date(user.createdAt).toLocaleDateString() : '未知'}</span>
                     </div>
                   </div>
                 </div>

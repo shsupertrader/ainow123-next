@@ -62,7 +62,7 @@ export async function POST(request: NextRequest) {
     console.error('Test ComfyUI connection error:', error)
     return NextResponse.json({
       success: false,
-      error: `连接测试失败: ${error.message}`
+      error: `连接测试失败: ${error instanceof Error ? error.message : String(error)}`
     })
   }
 }

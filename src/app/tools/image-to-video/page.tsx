@@ -97,10 +97,10 @@ export default function ImageToVideoPage() {
         const data = await response.json()
 
         if (data.status === 'COMPLETED') {
-          setResult(prev => ({ ...prev, ...data }))
+          setResult((prev: any) => ({ ...prev, ...data }))
           clearInterval(pollInterval)
         } else if (data.status === 'FAILED') {
-          setResult(prev => ({ ...prev, ...data }))
+          setResult((prev: any) => ({ ...prev, ...data }))
           clearInterval(pollInterval)
         }
       } catch (error) {

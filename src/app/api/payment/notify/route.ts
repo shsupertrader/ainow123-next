@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
     // 查找支付记录
     const payment = await prisma.payment.findUnique({
       where: { orderId: out_trade_no },
-      include: { user: true, order: true }
+      include: { user: true }
     })
 
     if (!payment) {
@@ -51,11 +51,17 @@ export async function POST(request: NextRequest) {
           }
         })
 
-        // 更新订单状态
-        await tx.order.update({
-          where: { id: payment.order!.id },
-          data: { status: 'PAID' }
+        // 更新订单状态（如果存在关联订单）
+        const relatedOrder = await tx.order.findFirst({
+          where: { paymentId: payment.id }
         })
+        
+        if (relatedOrder) {
+          await tx.order.update({
+            where: { id: relatedOrder.id },
+            data: { status: 'PAID' }
+          })
+        }
 
         // 增加用户积分
         await tx.user.update({
@@ -77,10 +83,17 @@ export async function POST(request: NextRequest) {
         data: { status: 'FAILED' }
       })
 
-      await prisma.order.update({
-        where: { id: payment.order!.id },
-        data: { status: 'CANCELLED' }
+      // 更新关联订单状态（如果存在）
+      const relatedOrder = await prisma.order.findFirst({
+        where: { paymentId: payment.id }
       })
+      
+      if (relatedOrder) {
+        await prisma.order.update({
+          where: { id: relatedOrder.id },
+          data: { status: 'CANCELLED' }
+        })
+      }
 
       console.log(`Payment failed for order: ${out_trade_no}`)
       return NextResponse.json({ message: 'Payment failed' })

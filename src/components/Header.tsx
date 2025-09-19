@@ -4,14 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import LoginModal from './LoginModal'
 import RegisterModal from './RegisterModal'
-
-interface User {
-  id: string
-  username: string
-  email: string
-  credits: number
-  avatar?: string
-}
+import { User } from '@/types/user'
 
 interface HeaderProps {
   user: User | null
